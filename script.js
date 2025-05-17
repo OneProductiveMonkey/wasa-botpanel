@@ -1,4 +1,6 @@
 
+const API_BASE = "https://your-backend-url.com"; // ← Byt ut när du har backend live
+
 function connectPhantom() {
   if (window.solana && window.solana.isPhantom) {
     window.solana.connect().then(res => {
@@ -13,13 +15,36 @@ function connectPhantom() {
 }
 
 function startBot() {
-  document.getElementById("bot-status").innerText = "Botstatus: Aktiv";
-  log("Bot startad.");
+  fetch(`${API_BASE}/start-bot`, { method: 'POST' })
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("bot-status").innerText = "Botstatus: Aktiv";
+      log("Bot startad (backend).");
+    })
+    .catch(() => log("Misslyckades kontakta backend."));
 }
 
 function stopBot() {
-  document.getElementById("bot-status").innerText = "Botstatus: Stoppad";
-  log("Bot stoppad.");
+  fetch(`${API_BASE}/stop-bot`, { method: 'POST' })
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("bot-status").innerText = "Botstatus: Stoppad";
+      log("Bot stoppad (backend).");
+    })
+    .catch(() => log("Misslyckades kontakta backend."));
+}
+
+function loadLog() {
+  fetch(`${API_BASE}/log`)
+    .then(res => res.json())
+    .then(entries => {
+      const logBox = document.getElementById("log-output");
+      logBox.innerHTML = "";
+      entries.forEach(msg => {
+        const time = new Date().toLocaleTimeString();
+        logBox.innerHTML += `<div>[${time}] ${msg}</div>`;
+      });
+    });
 }
 
 function log(msg) {
@@ -28,3 +53,6 @@ function log(msg) {
   logBox.innerHTML += `<div>[${time}] ${msg}</div>`;
   logBox.scrollTop = logBox.scrollHeight;
 }
+
+// Valfritt: autoload logg var 5:e sekund
+setInterval(loadLog, 5000);
