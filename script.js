@@ -1,5 +1,5 @@
 
-const API_BASE = "https://your-backend-url.com"; // ← Byt ut när du har backend live
+const API_BASE = "https://wasabot-backend.postitguden.repl.co"; // ← Byt ut när du har backend live
 
 function connectPhantom() {
   if (window.solana && window.solana.isPhantom) {
