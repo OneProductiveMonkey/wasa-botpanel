@@ -1,6 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", function () {
-  const API_BASE = "https://wasabot-backend--postitguden.repl.co";
+  const API_BASE = "http://172.31.128.27:8080/";
 
   document.getElementById("connect-wallet").addEventListener("click", connectPhantom);
   document.getElementById("start-bot").addEventListener("click", startBot);
