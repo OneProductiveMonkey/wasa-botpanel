@@ -3,33 +3,34 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
-  <title>Logga in – WasaBot</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wasa Tradingbot</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="login-container">
-    <div class="login-box">
-      <h1>Logga in</h1>
-      <form onsubmit="login(event)">
-        <label for="email">E-postadress</label>
-        <input type="email" id="email" placeholder="you@example.com" required>
-        <label for="password">Lösenord</label>
-        <input type="password" id="password" placeholder="••••••••" required>
-        <button type="submit">Logga in</button>
-      </form>
-    </div>
+  <h1>Wasa Tradingbot</h1>
+
+  <button id="connectWallet">🔗 Anslut Wallet</button>
+  <p>Wallet: <span id="walletAddress">Ingen wallet ansluten</span></p>
+
+  <label>Budget (€):</label>
+  <input type="number" id="budget" value="100" />
+
+  <label>Strategi:</label>
+  <select id="strategy">
+    <option value="Arbitrage">Buy Low / Sell High</option>
+  </select>
+
+  <div class="buttons">
+    <button id="startBot">🚀 Starta Bot</button>
+    <button id="stopBot">⛔ Stoppa Bot</button>
   </div>
-  <script>
-    function login(e) {
-      e.preventDefault();
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      if (email === "admin@wasa.se" && password === "wasa123") {
-        window.location.href = "panel.html";
-      } else {
-        alert("Fel inloggningsuppgifter");
-      }
-    }
-  </script>
+
+  <p>Botstatus: <span id="botStatus">Offline</span></p>
+
+  <h3>Logg</h3>
+  <div id="log" class="log"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>

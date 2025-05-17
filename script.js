@@ -1,63 +1,67 @@
 
-document.addEventListener("DOMContentLoaded", function () {
-  const API_BASE = "http://172.31.128.27:8080/";
+const connectWalletButton = document.getElementById('connectWallet');
+const walletAddressSpan = document.getElementById('walletAddress');
+const startBotButton = document.getElementById('startBot');
+const stopBotButton = document.getElementById('stopBot');
+const botStatusSpan = document.getElementById('botStatus');
+const logElement = document.getElementById('log');
+const budgetInput = document.getElementById('budget');
+const strategySelect = document.getElementById('strategy');
 
-  document.getElementById("connect-wallet").addEventListener("click", connectPhantom);
-  document.getElementById("start-bot").addEventListener("click", startBot);
-  document.getElementById("stop-bot").addEventListener("click", stopBot);
+const API_BASE = "https://wasa-backend.onrender.com";
 
-  function connectPhantom() {
-    if (window.solana && window.solana.isPhantom) {
-      window.solana.connect().then(res => {
-        document.getElementById('wallet-status').innerText = 'Wallet: ' + res.publicKey;
-        log('Wallet ansluten.');
-      }).catch(() => {
-        alert('Kunde inte ansluta till Phantom.');
-      });
-    } else {
-      alert('Phantom Wallet hittades inte.');
+function logMessage(message, isError = false) {
+    const timestamp = new Date().toLocaleTimeString('sv-SE');
+    const line = document.createElement('div');
+    line.textContent = `[${timestamp}] ${message}`;
+    line.style.color = isError ? '#ff4d4d' : '#00ff00';
+    logElement.appendChild(line);
+    logElement.scrollTop = logElement.scrollHeight;
+}
+
+connectWalletButton.addEventListener('click', async () => {
+    try {
+        const wallet = "H4JDBw8UD7o7Tk2HGoEKrrTr94YPNvAT6ajhPRUdAQ1";
+        walletAddressSpan.textContent = wallet;
+        logMessage("Wallet ansluten.");
+    } catch (error) {
+        logMessage("Misslyckades ansluta wallet.", true);
     }
-  }
+});
 
-  function startBot() {
-    fetch(`${API_BASE}/start-bot`, { method: 'POST' })
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("bot-status").innerText = "Botstatus: Aktiv";
-        log("Bot startad (backend).");
-      })
-      .catch(() => log("Misslyckades kontakta backend."));
-  }
+startBotButton.addEventListener('click', async () => {
+    const budget = budgetInput.value;
+    const strategy = strategySelect.value;
 
-  function stopBot() {
-    fetch(`${API_BASE}/stop-bot`, { method: 'POST' })
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("bot-status").innerText = "Botstatus: Stoppad";
-        log("Bot stoppad (backend).");
-      })
-      .catch(() => log("Misslyckades kontakta backend."));
-  }
-
-  function loadLog() {
-    fetch(`${API_BASE}/log`)
-      .then(res => res.json())
-      .then(entries => {
-        const logBox = document.getElementById("log-output");
-        logBox.innerHTML = "";
-        entries.forEach(msg => {
-          const time = new Date().toLocaleTimeString();
-          logBox.innerHTML += `<div>[${time}] ${msg}</div>`;
+    try {
+        const response = await fetch(`${API_BASE}/start-bot`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ budget, strategy })
         });
-      });
-  }
 
-  function log(msg) {
-    const logBox = document.getElementById("log-output");
-    const time = new Date().toLocaleTimeString();
-    logBox.innerHTML += `<div>[${time}] ${msg}</div>`;
-    logBox.scrollTop = logBox.scrollHeight;
-  }
+        if (response.ok) {
+            botStatusSpan.textContent = "Aktiv";
+            logMessage("Bot startad.");
+        } else {
+            throw new Error();
+        }
+    } catch (error) {
+        logMessage("Misslyckades kontakta backend.", true);
+    }
+});
 
-  setInterval(loadLog, 5000);
+stopBotButton.addEventListener('click', async () => {
+    try {
+        const response = await fetch(`${API_BASE}/stop-bot`, { method: "POST" });
+
+        if (response.ok) {
+            botStatusSpan.textContent = "Offline";
+            logMessage("Bot stoppad.");
+        } else {
+            throw new Error();
+        }
+    } catch (error) {
+        logMessage("Misslyckades kontakta backend.", true);
+    }
 });
