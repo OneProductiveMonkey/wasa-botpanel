@@ -7,28 +7,30 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Wasa Tradingbot</h1>
-  <button id="connect-wallet">🔗 Anslut Wallet</button>
-  <div id="wallet-status">Ingen wallet ansluten</div>
+  <div class="container">
+    <h1>Wasa Tradingbot</h1>
+    <button id="connect-wallet">🔗 Anslut Wallet</button>
+    <div id="wallet-status">Ingen wallet ansluten</div>
 
-  <p>Budget (€):</p>
-  <input id="budget" type="number" value="100">
+    <label for="budget">Budget (€):</label>
+    <input id="budget" type="number" value="100">
 
-  <p>Strategi:</p>
-  <select id="strategy">
-    <option value="arbitrage">Arbitrage</option>
-    <option value="buy-sell">Buy Low / Sell High</option>
-  </select>
+    <label for="strategy">Strategi:</label>
+    <select id="strategy">
+      <option value="arbitrage">Arbitrage</option>
+      <option value="buy-sell">Buy Low / Sell High</option>
+    </select>
 
-  <div>
-    <button id="start-bot">🚀 Starta Bot</button>
-    <button id="stop-bot">⛔ Stoppa Bot</button>
+    <div class="button-group">
+      <button id="start-bot">🚀 Starta Bot</button>
+      <button id="stop-bot">⛔ Stoppa Bot</button>
+    </div>
+
+    <div id="bot-status">Botstatus: Offline</div>
+
+    <h3>Logg</h3>
+    <div id="log-output" class="log-box"></div>
   </div>
-
-  <div id="bot-status">Botstatus: Offline</div>
-
-  <h3>Logg</h3>
-  <div id="log-output" style="background:#111; color:white; padding:1em; height:150px; overflow-y:auto;"></div>
 
   <script src="script.js"></script>
 </body>
