@@ -2,39 +2,34 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8" />
-  <title>WasaBot Panel</title>
+  <meta charset="UTF-8">
+  <title>Wasa Tradingbot</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="panel-container">
-    <h1>Wasa Tradingbot</h1>
-    <div class="section">
-      <button onclick="connectPhantom()">🔗 Anslut Wallet</button>
-      <p id="wallet-status">Ingen wallet ansluten</p>
-    </div>
-    <div class="section">
-      <label>Budget (€):</label>
-      <input type="number" id="budget" value="100">
-    </div>
-    <div class="section">
-      <label>Strategi:</label>
-      <select id="strategy">
-        <option value="arbitrage">Arbitrage</option>
-        <option value="buy-low-sell-high">Buy Low / Sell High</option>
-        <option value="momentum">Momentum (TA)</option>
-      </select>
-    </div>
-    <div class="section">
-      <button onclick="startBot()">🚀 Starta Bot</button>
-      <button onclick="stopBot()">⛔ Stoppa Bot</button>
-      <p id="bot-status">Botstatus: Offline</p>
-    </div>
-    <div class="section">
-      <h3>Logg</h3>
-      <div id="log-output" class="log-box"></div>
-    </div>
+  <h1>Wasa Tradingbot</h1>
+  <button id="connect-wallet">🔗 Anslut Wallet</button>
+  <div id="wallet-status">Ingen wallet ansluten</div>
+
+  <p>Budget (€):</p>
+  <input id="budget" type="number" value="100">
+
+  <p>Strategi:</p>
+  <select id="strategy">
+    <option value="arbitrage">Arbitrage</option>
+    <option value="buy-sell">Buy Low / Sell High</option>
+  </select>
+
+  <div>
+    <button id="start-bot">🚀 Starta Bot</button>
+    <button id="stop-bot">⛔ Stoppa Bot</button>
   </div>
+
+  <div id="bot-status">Botstatus: Offline</div>
+
+  <h3>Logg</h3>
+  <div id="log-output" style="background:#111; color:white; padding:1em; height:150px; overflow-y:auto;"></div>
+
   <script src="script.js"></script>
 </body>
 </html>
