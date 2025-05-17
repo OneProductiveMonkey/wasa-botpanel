@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wasa Invest - Bot Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-[#1A070D] text-white font-sans">
+
+<section class="p-6 rounded-2xl shadow-xl bg-[#1A070D] text-white max-w-xl mx-auto mt-10">
+  <h2 class="text-2xl font-bold text-[#d6b072] mb-4">Trading Bot Panel</h2>
+
+  <!-- Wallet-koppling -->
+  <div class="mb-4">
+    <button onclick="connectPhantomWallet()" class="bg-[#d6b072] text-black px-4 py-2 rounded-xl hover:bg-white">
+      Connect Phantom Wallet
+    </button>
+    <p id="wallet-address" class="mt-2 text-sm text-gray-300">Ingen wallet ansluten</p>
+  </div>
+
+  <!-- Botkontroller -->
+  <div class="mb-4">
+    <button onclick="startBot()" class="bg-green-600 px-4 py-2 rounded-xl mr-2 hover:bg-green-500">Starta Bot</button>
+    <button onclick="stopBot()" class="bg-red-600 px-4 py-2 rounded-xl hover:bg-red-500">Stoppa Bot</button>
+    <p id="bot-status" class="mt-2 text-sm">Botstatus: <span class="font-semibold text-yellow-400">Offline</span></p>
+  </div>
+
+  <!-- Inställningar -->
+  <div class="mb-4">
+    <label for="budget" class="block mb-1">Ange budget (€):</label>
+    <input type="number" id="budget" value="100" class="w-full p-2 rounded-lg bg-gray-800 text-white border border-gray-600" />
+  </div>
+
+  <!-- Plats för framtida logg -->
+  <div class="mt-6">
+    <h3 class="text-lg font-semibold text-[#d6b072]">Bot-logg</h3>
+    <div id="bot-log" class="bg-black/30 border border-gray-600 rounded-lg p-2 h-40 overflow-y-scroll text-sm mt-2">
+      <!-- Loggdata kommer här -->
+    </div>
+  </div>
+</section>
+
+<script>
+async function connectPhantomWallet() {
+  if (window.solana && window.solana.isPhantom) {
+    try {
+      const response = await window.solana.connect();
+      document.getElementById("wallet-address").innerText = `Wallet: ${response.publicKey}`;
+    } catch (err) {
+      alert("Kunde inte ansluta till Phantom.");
+    }
+  } else {
+    alert("Phantom Wallet hittades inte. Installera från https://phantom.app/");
+  }
+}
+
+function startBot() {
+  document.getElementById("bot-status").innerHTML = 'Botstatus: <span class="text-green-400">Aktiv</span>';
+  logMessage("Bot startad.");
+}
+
+function stopBot() {
+  document.getElementById("bot-status").innerHTML = 'Botstatus: <span class="text-red-400">Stoppad</span>';
+  logMessage("Bot stoppad.");
+}
+
+function logMessage(msg) {
+  const log = document.getElementById("bot-log");
+  const time = new Date().toLocaleTimeString();
+  log.innerHTML += `<div>[${time}] ${msg}</div>`;
+  log.scrollTop = log.scrollHeight;
+}
+</script>
+
+</body>
+</html>
