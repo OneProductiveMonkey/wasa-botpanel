@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <title>WasaBot Panel</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="panel-container">
+    <h1>Wasa Tradingbot</h1>
+    <div class="section">
+      <button onclick="connectPhantom()">🔗 Anslut Wallet</button>
+      <p id="wallet-status">Ingen wallet ansluten</p>
+    </div>
+    <div class="section">
+      <label>Budget (€):</label>
+      <input type="number" id="budget" value="100">
+    </div>
+    <div class="section">
+      <label>Strategi:</label>
+      <select id="strategy">
+        <option value="arbitrage">Arbitrage</option>
+        <option value="buy-low-sell-high">Buy Low / Sell High</option>
+        <option value="momentum">Momentum (TA)</option>
+      </select>
+    </div>
+    <div class="section">
+      <button onclick="startBot()">🚀 Starta Bot</button>
+      <button onclick="stopBot()">⛔ Stoppa Bot</button>
+      <p id="bot-status">Botstatus: Offline</p>
+    </div>
+    <div class="section">
+      <h3>Logg</h3>
+      <div id="log-output" class="log-box"></div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
