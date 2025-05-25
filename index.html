@@ -2,30 +2,170 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Wasa Tradingbot</title>
-    <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WasaBot Panel</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: #210404;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .panel {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      max-width: 1400px;
+      width: 100%;
+    }
+    .left, .right {
+      flex: 1;
+    }
+    .wallet-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .checkmark {
+      color: #4caf50;
+    }
+    .button {
+      background-color: #d6b072;
+      color: #000;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .button:disabled {
+      background-color: #999;
+    }
+    .field {
+      margin-bottom: 1rem;
+    }
+    .logg {
+      background-color: #111;
+      color: #0f0;
+      padding: 1rem;
+      border-radius: 6px;
+      font-family: monospace;
+      min-height: 140px;
+    }
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .stats div {
+      background-color: #2b0000;
+      padding: 1rem;
+      border-radius: 6px;
+      text-align: center;
+      flex: 1;
+    }
+    .signals {
+      background-color: #2b0000;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .signal {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #444;
+    }
+    .signal:last-child {
+      border-bottom: none;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Wasa Tradingbot</h1>
-        <button id="connectWallet">🔗 Anslut Wallet</button>
-        <p>Wallet: <span id="walletAddress">Ingen wallet ansluten</span></p>
-        <label>Budget (€):</label><input type="number" id="budget" value="1000" />
-        <label>Strategi:</label>
-        <select id="strategy">
-            <option value="buy-low-sell-high">Buy Low / Sell High</option>
-            <option value="arbitrage">Arbitrage</option>
+  <h1>AI-based arbitrage & crypto trading panel</h1>
+
+  <div class="panel">
+    <div class="left">
+      <div class="wallet-bar">
+        <button class="button">🔗 Anslut Wallet</button>
+        <span class="checkmark">✔️</span>
+      </div>
+
+      <div>Wallet: H4JDBw3UD7oTK2+HGKeErr794YPNvAT6ajhRUA01</div>
+
+      <div class="field">
+        <label>Budget (€)</label><br />
+        <input type="number" value="100" style="width: 100%; padding: 0.5rem;" />
+      </div>
+
+      <div class="field">
+        <label>Strategi</label><br />
+        <select style="width: 100%; padding: 0.5rem;">
+          <option>Buy Low / Sell High</option>
         </select>
-        <div class="buttons">
-            <button id="startBot">🚀 Starta Bot</button>
-            <button id="stopBot">⛔ Stoppa Bot</button>
-        </div>
-        <p>Botstatus: <span id="botStatus">Offline</span></p>
-        <h2>Logg</h2>
-        <pre id="logOutput"></pre>
+      </div>
+
+      <button class="button">🚀 Starta Arbitrage</button>
+
+      <h3>Logg</h3>
+      <div class="logg">
+        [14:32:25] Wallet ansluten.<br/>
+        [14:32:31] Arbitrage startad.<br/>
+        [14:32:34] Köpt BTC på Börs A o säljer på Börs B
+      </div>
     </div>
-    <script src="script.js"></script>
+
+    <div class="right">
+      <div class="stats">
+        <div>
+          <div>Avkastning (Live)</div>
+          <strong style="color:lightgreen;">+0,8%</strong>
+        </div>
+        <div>
+          <div>Avkastning (24h)</div>
+          <strong style="color:lightgreen;">+5,2%</strong>
+        </div>
+        <div>
+          <div>Avkastning (1.5r)</div>
+          <strong style="color:lightgreen;">+124,1%</strong>
+        </div>
+      </div>
+
+      <div class="signals">
+        <h3>AI-signaler</h3>
+        <div class="signal">
+          <div>
+            <strong>Shiba Inu</strong><br />
+            Högt uppgångspotential
+          </div>
+          <button class="button">Köp</button>
+        </div>
+        <div class="signal">
+          <div>
+            <strong>Avalanche</strong><br />
+            Högt uppgångspotential
+          </div>
+          <button class="button">Köp</button>
+        </div>
+        <div class="signal">
+          <div>
+            <strong>Fantom</strong><br />
+            Högt uppgångspotential
+          </div>
+          <button class="button">Köp</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
