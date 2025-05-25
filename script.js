@@ -1,38 +1,32 @@
+document.getElementById("connectWallet").onclick = () => {
+    document.getElementById("walletStatus").textContent = "Wallet: H4JDBw3...";
+    document.getElementById("disconnectWallet").hidden = false;
+    log("Wallet ansluten.");
+};
 
-const api_base = "https://wasa-backend.onrender.com";
+document.getElementById("disconnectWallet").onclick = () => {
+    document.getElementById("walletStatus").textContent = "Ingen wallet ansluten";
+    document.getElementById("disconnectWallet").hidden = true;
+    log("Wallet frånkopplad.");
+};
 
-document.getElementById("connectWallet").addEventListener("click", () => {
-    const address = "H4JDBw8UD7o7Tk2HGoEKrrTr94YPNvAT6ajhPRUdAQ1"; 
-    document.getElementById("walletAddress").innerText = address;
-    log(`[${new Date().toLocaleTimeString()}] Wallet ansluten.`);
-});
+document.getElementById("startBot").onclick = () => {
+    const strategy = document.getElementById("strategy").value;
+    document.getElementById("botStatus").textContent = "Aktiv";
+    log(`Bot startad med strategi: ${strategy}`);
+};
 
-document.getElementById("startBot").addEventListener("click", () => {
-    fetch(`${api_base}/start-bot`, { method: "POST" })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("botStatus").innerText = "Aktiv";
-            log(`[${new Date().toLocaleTimeString()}] Bot startad.`);
-        })
-        .catch(() => {
-            log(`[${new Date().toLocaleTimeString()}] Misslyckades kontakta backend.`);
-        });
-});
+document.getElementById("stopBot").onclick = () => {
+    document.getElementById("botStatus").textContent = "Offline";
+    log("Bot stoppad.");
+};
 
-document.getElementById("stopBot").addEventListener("click", () => {
-    fetch(`${api_base}/stop-bot`, { method: "POST" })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("botStatus").innerText = "Offline";
-            log(`[${new Date().toLocaleTimeString()}] Bot stoppad.`);
-        })
-        .catch(() => {
-            log(`[${new Date().toLocaleTimeString()}] Misslyckades kontakta backend.`);
-        });
-});
+document.getElementById("buyTopSignal").onclick = () => {
+    log("AI-signal köpt: Shiba Inu");
+};
 
 function log(message) {
+    const now = new Date().toLocaleTimeString();
     const output = document.getElementById("logOutput");
-    output.innerText += `\n${message}`;
-    output.scrollTop = output.scrollHeight;
+    output.textContent += `\n[${now}] ${message}`;
 }

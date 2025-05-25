@@ -1,37 +1,57 @@
-
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <title>Wasa Tradingbot</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Wasa Tradingbot Panel</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Wasa Tradingbot</h1>
-    <button id="connect-wallet">🔗 Anslut Wallet</button>
-    <div id="wallet-status">Ingen wallet ansluten</div>
+    <header>
+        <h1>AI-based arbitrage & crypto trading panel</h1>
+    </header>
+    <main>
+        <section class="wallet-section">
+            <button id="connectWallet">🔗 Anslut Wallet</button>
+            <span id="walletStatus">Ingen wallet ansluten</span>
+            <span id="disconnectWallet" hidden>❌ Koppla från</span>
+        </section>
 
-    <label for="budget">Budget (€):</label>
-    <input id="budget" type="number" value="100">
+        <section class="stats">
+            <div>Avkastning (Live): <span id="liveReturn">+0.8%</span></div>
+            <div>Avkastning (24h): <span id="dailyReturn">+5.2%</span></div>
+            <div>Avkastning (1 år): <span id="yearReturn">+124.1%</span></div>
+        </section>
 
-    <label for="strategy">Strategi:</label>
-    <select id="strategy">
-      <option value="arbitrage">Arbitrage</option>
-      <option value="buy-sell">Buy Low / Sell High</option>
-    </select>
+        <section class="bot-controls">
+            <label>Budget (€): <input type="number" id="budget" value="100"/></label>
+            <label>Strategi:
+                <select id="strategy">
+                    <option>Buy Low / Sell High</option>
+                    <option>Arbitrage</option>
+                    <option>AI Trading</option>
+                </select>
+            </label>
+            <button id="startBot">🚀 Starta Bot</button>
+            <button id="stopBot">⛔ Stoppa Bot</button>
+            <div>Botstatus: <span id="botStatus">Offline</span></div>
+        </section>
 
-    <div class="button-group">
-      <button id="start-bot">🚀 Starta Bot</button>
-      <button id="stop-bot">⛔ Stoppa Bot</button>
-    </div>
+        <section class="ai-signals">
+            <h2>AI-signaler</h2>
+            <ul id="signals">
+                <li><strong>Shiba Inu</strong><br/>Har en hög uppgångspotential</li>
+                <li><strong>Avalanche</strong><br/>Har en hög uppgångspotential</li>
+                <li><strong>Fantom</strong><br/>Har en hög uppgångspotential</li>
+            </ul>
+            <button id="buyTopSignal">🛒 Köp Topp-signal</button>
+        </section>
 
-    <div id="bot-status">Botstatus: Offline</div>
-
-    <h3>Logg</h3>
-    <div id="log-output" class="log-box"></div>
-  </div>
-
-  <script src="script.js"></script>
+        <section class="log">
+            <h2>Logg</h2>
+            <pre id="logOutput">[Startklar]</pre>
+        </section>
+    </main>
+    <script src="script.js"></script>
 </body>
 </html>
