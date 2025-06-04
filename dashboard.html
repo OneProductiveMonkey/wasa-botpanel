@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wasa Trading Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>
+        <h1>Trading Dashboard</h1>
+    </header>
+    <main class="container">
+        <section class="wallet-section">
+            <button id="connectWallet">🔗 Anslut Wallet</button>
+            <span id="walletStatus">Ingen wallet ansluten</span>
+            <span id="disconnectWallet" hidden>❌ Koppla från</span>
+        </section>
+        <section class="bot-controls">
+            <label>Budget (€): <input type="number" id="budget" value="100"/></label>
+            <label>Strategi:
+                <select id="strategy">
+                    <option>Buy Low / Sell High</option>
+                    <option>Arbitrage</option>
+                    <option>AI Trading</option>
+                </select>
+            </label>
+            <button id="startBot">🚀 Starta Bot</button>
+            <button id="stopBot">⛔ Stoppa Bot</button>
+            <div>Botstatus: <span id="botStatus">Offline</span></div>
+        </section>
+        <section class="ai-signals">
+            <h2>AI-signaler</h2>
+            <ul id="signals">
+                <li><strong>Shiba Inu</strong><br/>Har en hög uppgångspotential</li>
+                <li><strong>Avalanche</strong><br/>Har en hög uppgångspotential</li>
+                <li><strong>Fantom</strong><br/>Har en hög uppgångspotential</li>
+            </ul>
+            <button id="buyTopSignal">🛒 Köp Topp-signal</button>
+        </section>
+        <section class="log">
+            <h2>Logg</h2>
+            <pre id="logOutput">[Startklar]</pre>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
