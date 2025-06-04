@@ -15,7 +15,6 @@ Detta är ett frontend-gränssnitt för att styra en arbitrage- och kryptohandel
 
 ## Instruktioner
 
-1. Ladda upp `index.html` till din GitHub-repo
+1. Ladda upp `dashboard.html` (eller `index.html`) till din GitHub-repo
 2. Aktivera GitHub Pages från Settings > Pages
 3. (Valfritt) Lägg till en `CNAME` för anpassad domän
-

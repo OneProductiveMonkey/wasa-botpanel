@@ -21,6 +21,11 @@ document.getElementById("stopBot").onclick = () => {
     log("Bot stoppad.");
 };
 
+// Logga ändring av budget
+document.getElementById("budget").onchange = (e) => {
+    log(`Budget satt till €${e.target.value}`);
+};
+
 document.getElementById("buyTopSignal").onclick = () => {
     log("AI-signal köpt: Shiba Inu");
 };
