@@ -19,3 +19,9 @@ Detta är ett frontend-gränssnitt för att styra en arbitrage- och kryptohandel
 2. Aktivera GitHub Pages från Settings > Pages
 3. (Valfritt) Lägg till en `CNAME` för anpassad domän
 
+
+## Filstruktur
+- index.html - huvudsidan
+- style.css - sidans stilar
+- script.js - logik och interaktioner
+- requirements.txt - Pythonpaket för planerad Flask-backend
